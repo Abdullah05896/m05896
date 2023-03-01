@@ -1,0 +1,340 @@
+<?php
+define('API_KEY','6043530922:AAFqXroqrnuVyB9V-Gzi6zJOEkisPDyUfMY');
+function bot($method,$datas=[]){
+    $url = "https://api.telegram.org/bot".API_KEY."/".$method;
+    $ch = curl_init();
+    curl_setopt($ch,CURLOPT_URL,$url);
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($ch,CURLOPT_POSTFIELDS,http_build_query($datas));
+    $res = curl_exec($ch);
+    if(curl_error($ch)){
+        var_dump(curl_error($ch));
+    }else{
+        return json_decode($res);
+    }
+}
+function sendaction($chat_id, $action){
+ bot('sendchataction',[
+ 'chat_id'=>$chat_id,
+ 'action'=>$action
+ ]);
+ }
+$update = json_decode(file_get_contents('php://input'));
+var_dump($update);
+$message = $update->message;
+$from_id = $message->from->id;
+$chat_id = $message->chat->id;
+$text = $message->text;
+$textmessage = isset($update->message->text)?$update->message->text:'';
+$edit = $update->message->edited_channel_post;
+$new_gp_name = $update->message->new_chat_title;
+$new_gp_photo = $update->message->new_chat_photo;
+$del_gp_photo = $update->message->delete_chat_photo;
+$new = $update->message->new_chat_member;
+$left = $update->message->left_chat_member;
+$test = $update->message->contact;
+$audio = $update->message->audio;
+$location = $update->message->location;
+$game = $update->message->game; 
+$name = $update->message->from->first_name;
+$gp_name = $update->message->chat->title;
+$user = $update->message->from->username;
+$sticker = $update->message->sticker;
+$video = $update->message->video;
+$photo = $update->message->photo;
+$voice = $update->message->voice;
+$doc = $update->message->document;
+$fwd = $update->message->forward_from;
+$fwd_id = $update->message->forward_from->id;
+$fwd_to = $update->message->forward_to;
+$fwd_user = $update->message->forward_from->username;
+$fwd_name = $update->message->forward_from->first_name;
+$pin = $update->message->pinned_message;
+$re = $update->message->reply_to_message;
+$re_id = $update->message->reply_to_message->from->id;
+$re_user = $update->message->reply_to_message->from->username;
+$user_id = $update->message->from->id;
+$re_name = $update->message->reply_to_message->from->first_name;
+$re_msgid = $update->message->reply_to_message->message_id;
+$re_chat_id = $update->message->reply_to_message->chat->id;
+$fwdre_id = $update->message->reply_to_message->forward_from->id;
+$message_id = $update->message->message_id;
+$type = $update->message->chat->type;
+
+$sudo = 336729807;
+
+$cllchatid = $update->callback_query->message->chat->id;
+$data = $update->callback_query->data;
+$cllmsegid = $update->callback_query->message->message_id;
+$cllfor = $update->callback_query->from->id;
+$edit = $update->edited_message;
+$chat_edit_id = $update->edited_message->chat->id;
+$message_edit_id = $update->edited_message->message_id;
+
+
+$photo1 = file_get_contents("photo.txt");
+$fwd1 = file_get_contents("fwd.txt");
+
+//----------------------- l فكشنات l----------------------
+function SendMessage($ChatId, $TextMsg)
+{
+ bot('sendMessage',[
+'chat_id'=>$ChatId,
+'text'=>$TextMsg,
+'parse_mode'=>"html"
+]);
+}
+if($text == 'المطور'){
+ $phone = '+9647832041705';
+ $nameea = 'Rues Ahmed 💜🙋🏻‍♂️';
+bot('sendContact',[
+ 'chat_id'=>$chat_id,
+ 'phone_number'=>$phone,
+ 'first_name'=>$nameea,
+     ]);
+     }
+ 
+if($text == "ايدي"){
+bot('sendmessage',[
+'chat_id'=>$chat_id,
+'message_id'=>$message_id,
+'text'=>" *اسمك 🎶* :* $name *
+*معرفك 🗒*:* @$user *",
+'parse_mode'=>"MARKDOWN",
+'reply_markup'=>json_encode([
+      'inline_keyboard'=>[
+[
+['text'=>"Rues" ,'url'=>"https://t.me/ApiBlack"]
+],
+]
+])
+]);
+}
+$new_member = $update->message->new_chat_member;
+$left = $update->message->left_chat_member;
+if($new_member){
+bot('sendMessage',[
+'chat_id'=>$chat_id,
+'message_id'=>$message->message_id,
+'text'=>"<b>اهلا بك في المجموعه  🌝✨</b>
+<b>اسم المجموعه 📡</b> : <code>$gp_name</code>
+<b>التزم بقوانين المجموعه 🔉💬✌🏿</b>",
+'parse_mode'=>"html",
+]);
+}
+if($left){
+bot('sendMessage',[
+'chat_id'=>$chat_id,
+'message_id'=>$message->message_id,
+'text'=>"<b>وداعا ✌🏿💜</b>",
+'parse_mode'=>"html",
+]);
+}
+if ($text == "وضع رابط" ){
+     file_put_contents("gplink.txt", "xz");[Forwarded from رويــۛৣـۛۛہسـۂ͜ާـہ ᴖ̈ 💜|℡]
+sendaction($chat_id, typing);
+        bot('sendmessage', [
+                'chat_id' => $chat_id,
+                'text' =>"<b>اهلا  $name 
+🌬ارسل الرابط</b>", 
+                'parse_mode'=>"html",
+               ]);
+               }
+               if ( $gplink == "xz" ){
+     file_put_contents("gplink.txt", $text);
+       sendaction($chat_id, typing);
+        bot('sendmessage', [
+                'chat_id' => $chat_id,
+                'text' =>"<b>تم 🙋🏻‍♂️</b>", 
+                'parse_mode'=>"html",
+               ]);
+               }
+               
+               if ($text == "الرابط" ){
+       sendaction($chat_id, typing);
+        bot('sendmessage', [
+                'chat_id' => $chat_id,
+                'text' =>"$gplink",            
+               ]);
+              
+}
+if($text == "ايدي الكروب" && $type == "supergroup"){
+bot('sendmessage',[
+'chat_id'=>$chat_id,
+'message_id'=>$message_id,
+'text'=>" *اسم الكروب📡* :* $gp_name *
+*ايدي الكروب 🗒*:* $chat_id *",
+'parse_mode'=>"MARKDOWN",
+'reply_markup'=>json_encode([
+      'inline_keyboard'=>[
+[
+['text'=>"Rues" ,'url'=>"https://t.me/ApiBlack"]
+],
+]
+])
+]);
+}
+
+if($text == "/start"){
+bot('sendmessage',[
+'chat_id'=>$chat_id,
+'message_id'=>$message_id,
+'text'=>" *مرحبا سيدي  . $name 😄 *
+
+ *هذا البوت يمكننه مسح اعادة توجيه,صور.. 🎭*
+
+*البوت يحمل اوامر اخرى 🎯 فقط ارسل مساعدة 🥇*
+
+*#️⃣ المطور = *@ApiBlack ⚜️
+*#️⃣ النظام  = 🇮🇶العربيه  *",
+'parse_mode'=>"MARKDOWN",
+'reply_markup'=>json_encode([
+      'inline_keyboard'=>[
+[
+['text'=>"Rues" ,'url'=>"https://t.me/ApiBlack"]
+],
+]
+])
+]);
+}
+
+
+if($text == "مساعدة"){
+bot('sendmessage',[
+'chat_id'=>$chat_id,
+'message_id'=>$message_id,
+'text'=>" _مرحبا سيدي ._ * $name 😄*
+
+*#️⃣ ارسل ~>/setweb + التوكن +الرابط  <~ * _: To Set Webhook 🆓⚜️✅_
+
+*#️⃣ارسل  ~> ايدي <~ *_: لعرض الايدي الخاص بك 🆔⚜️✅_
+
+*#️⃣ ارسل ~> ايدي الكروب <~ * _: لعرض ايدي الكروب 🆔⚜️✅_
+
+*#️ارسل  ~> وضع رابط <~ * _: لوضع رابط 💭⚜️✅_
+
+*#️ارسل  ~> الرابط <~ * _: لعرض الرابط 🔗⚜️✅_
+
+*#️ارسل  ~> تفعيل <~ * _: للتفعيل الاوتوماتيكي ♣️⚜️✅_
+
+*#️ارسل  ~> المطور <~ * _: لمعرفة المطور  📢⚜️✅_
+
+*#️المطور  : * @ApiBlack ⚜️
+*#️النظام  = 🇮🇶العربية * ",
+'parse_mode'=>"MARKDOWN",
+'reply_markup'=>json_encode([
+      'inline_keyboard'=>[
+[
+['text'=>"Rues" ,'url'=>"https://t.me/ApiBlack"]
+],
+]
+])
+]);
+}
+if($text == "تفعيل"){
+bot('sendmessage',[
+'chat_id'=>$chat_id,
+'message_id'=>$message_id,
+'text'=>"* اهلا سيدي . $name 😄 *
+
+_تم تفعيل المجموعه ⚜️✅_
+
+_القائمة المقفولة ⚜️👾 :_
+
+*اللعبة 👾* 
+*الفيديو 📢*
+*الصور 📸*
+*التوجيه 🔅*
+*الملصق 😹*
+*السبام ❌*
+*التاك ➰*
+
+*#️المطور =*@ApiBlack
+*#️النظام = 🇮🇶العربيه* ",
+'parse_mode'=>"MARKDOWN",
+'reply_markup'=>json_encode([
+      'inline_keyboard'=>[
+[
+['text'=>"Rues" ,'url'=>"https://t.me/ApiBlack"]
+],
+]
+])
+]);
+}
+if($fwd && $type == "supergroup"){
+bot('deleteMessage',[
+'chat_id'=>$chat_id,
+'message_id'=>$message->message_id
+]);
+}
+if($photo && $type == "supergroup"){
+bot('deleteMessage',[
+'chat_id'=>$chat_id,
+'message_id'=>$message->message_id
+]);
+}
+
+if($video && $type == "supergroup"){
+bot('deleteMessage',[
+'chat_id'=>$chat_id,
+'message_id'=>$message->message_id
+]);
+}
+
+if($game && $type == "supergroup"){
+bot('deleteMessage',[
+'chat_id'=>$chat_id,
+'message_id'=>$message->message_id
+]);
+}
+
+if($sticker && $type == "supergroup"){
+bot('deleteMessage',[
+'chat_id'=>$chat_id,
+'message_id'=>$message->message_id
+]);
+}
+////النشر في القناة/////
+if($text == "انشر"){
+        bot('sendmessage', [
+                'chat_id' =>-108177291,//ايدي القناة
+                'text' =>"<b>استقبل اعلاناتكم 💥 💎💶</b> 
+
+@Apiblack",
+'parse_mode'=>"html",
+'reply_markup'=>json_encode([
+      'inline_keyboard'=>[
+[
+['text'=>"Rues" ,'url'=>"https://t.me/ApiBlack"]
+],
+]
+])
+]);
+}
+////المطور/////
+if($text == "المطور"){
+ bot('sendMessage',[
+  'chat_id'=>$chat_id,
+  'text'=>"*#️⃣ المطور 🎶*",
+'parse_mode'=>"MarkDown",
+  'reply_to_message_id'=>$message_id,
+  'reply_markup'=>json_encode([
+      'inline_keyboard'=>[
+          [
+              ['text'=>"Rues Ahmed 🚹", 'callback_data'=>"keyboard"],
+              ['text'=>"@ApiBlack", 'url'=>"https://t.me/ApiBlack"],
+          ],v[Forwarded from رويــۛৣـۛۛہسـۂ͜ާـہ ᴖ̈ 💜|℡]
+]
+      ])
+  ]);
+}
+
+//// معلومات بلررد ////
+if($re && $text == "ايدي"){
+        bot('sendmessage', [
+                'chat_id' => $chat_id,
+                'text' => "id = $re_id
+name = $re_name
+user = $re_user",
+]);
+}
